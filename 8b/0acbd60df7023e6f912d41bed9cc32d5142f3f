@@ -1,0 +1,97 @@
+.github/workflows/validate.yml
+  s_fd8175c2c000ed::t_fa15d1ed7b8ea3 1-83
+pyproject.toml
+  s_fd8175c2c000ed::t_f14d86ff43129c 1,3,5-242,244-557
+  s_fd8175c2c000ed::t_d6cd600449ac90 2,4,243
+README.md
+  s_fd8175c2c000ed::t_91843cb73a8682 1-64
+custom_components/solar_billing_plan_export_rates/manifest.json
+  s_fd8175c2c000ed::t_91843cb73a8682 1-17
+custom_components/solar_billing_plan_export_rates/__init__.py
+  s_fd8175c2c000ed::t_2120e7e6a37b9a 4
+  s_fd8175c2c000ed::t_71bf06da851d32 48,53
+  s_fd8175c2c000ed::t_11994147fa158a 1-3,5-39,43-47,49-52,54-214
+  s_fd8175c2c000ed::t_83db1d6b40743c 40-42
+custom_components/solar_billing_plan_export_rates/config_flow.py
+  s_fd8175c2c000ed::t_31c958db1fff8c 115,124
+  s_fd8175c2c000ed::t_83db1d6b40743c 56-58
+  s_fd8175c2c000ed::t_2fb9c2e654d221 5-10,104,113
+  s_fd8175c2c000ed::t_2120e7e6a37b9a 103
+  s_fd8175c2c000ed::t_f9d1bccaa06484 105
+  s_fd8175c2c000ed::t_96e14affaceaed 1-4,11-55,59-102,106-112,114,116-123,125-129
+custom_components/solar_billing_plan_export_rates/const.py
+  s_fd8175c2c000ed::t_9c34bc11470c5e 3,26-27
+  s_fd8175c2c000ed::t_91843cb73a8682 1-2,5-25,28-31
+  s_fd8175c2c000ed::t_2fb9c2e654d221 4
+custom_components/solar_billing_plan_export_rates/entity.py
+  s_fd8175c2c000ed::t_11994147fa158a 1-28
+LICENSE
+  s_fd8175c2c000ed::t_feef02afd13aaa 1-201
+tests/common.py
+  s_fd8175c2c000ed::t_790782bcc98faf 1-42
+custom_components/solar_billing_plan_export_rates/strings.json
+  s_fd8175c2c000ed::t_96e14affaceaed 1-56
+tests/test_sensor.py
+  s_fd8175c2c000ed::t_790782bcc98faf 1-2,4-29,31-34,36-40,42-60,62-93,95-98,100-117,119-122,124-137
+  s_fd8175c2c000ed::t_83db1d6b40743c 35,99,123
+  s_fd8175c2c000ed::t_c67578e7bd2354 41
+  s_fd8175c2c000ed::t_71bf06da851d32 3,30,61,94,118
+mypy.ini
+  s_fd8175c2c000ed::t_4d178354709d94 45-46,68
+  s_fd8175c2c000ed::t_b348f227a7d167 1-44,47-67,69-71
+.github/dependabot.yml
+  s_fd8175c2c000ed::t_fa15d1ed7b8ea3 1-31
+scripts/generate_rates.py
+  s_fd8175c2c000ed::t_71bf06da851d32 7,109
+  s_fd8175c2c000ed::t_83db1d6b40743c 27-29,103-108
+  s_fd8175c2c000ed::t_0b961a1f9ff052 1-6,8-26,30-102,110-137
+custom_components/solar_billing_plan_export_rates/sensor.py
+  s_fd8175c2c000ed::t_71bf06da851d32 4,16,164
+  s_fd8175c2c000ed::t_96e14affaceaed 1-3,5,7-15,17-97,99-125,131-163,167
+  s_fd8175c2c000ed::t_83db1d6b40743c 98
+  s_fd8175c2c000ed::t_c67578e7bd2354 126-130
+  s_fd8175c2c000ed::t_31c958db1fff8c 6,165-166
+tests/test_config_flow.py
+  s_fd8175c2c000ed::t_790782bcc98faf 1-129
+.strict-typing
+  s_fd8175c2c000ed::t_fa15d1ed7b8ea3 1-8
+tests/__init__.py
+  s_fd8175c2c000ed::t_790782bcc98faf 1
+custom_components/solar_billing_plan_export_rates/quality_scale.yaml
+  s_fd8175c2c000ed::t_91843cb73a8682 1-60
+custom_components/solar_billing_plan_export_rates/rates.py
+  s_fd8175c2c000ed::t_2fb9c2e654d221 82-96
+  s_fd8175c2c000ed::t_71bf06da851d32 4-5,31,110
+  s_fd8175c2c000ed::t_83db1d6b40743c 108,186
+  s_fd8175c2c000ed::t_11994147fa158a 1-3,6-30,32-81,97-107,109,111-185,187-221
+custom_components/solar_billing_plan_export_rates/translations/en.json
+  s_fd8175c2c000ed::t_96e14affaceaed 1-56
+tests/conftest.py
+  s_fd8175c2c000ed::t_790782bcc98faf 1-8
+tests/test_rates.py
+  s_fd8175c2c000ed::t_71bf06da851d32 3
+  s_fd8175c2c000ed::t_790782bcc98faf 1-2,4-30,32-37,39-56,58-66,68-73,75-92,94-96,98-128
+  s_fd8175c2c000ed::t_83db1d6b40743c 31,38,57,67,74,93,97,129
+.gitignore
+  s_fd8175c2c000ed::t_fa15d1ed7b8ea3 1-15
+hacs.json
+  s_fd8175c2c000ed::t_91843cb73a8682 1-4
+uv.lock
+  s_fd8175c2c000ed::t_f3c07d66550e5d 1-2847
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "8b0acbd60df7023e6f912d41bed9cc32d5142f3f",
+  "prompts": {},
+  "sessions": {
+    "s_fd8175c2c000ed": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f4471-0e5c-7bd3-822f-40978ec3f63b",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Ben Hale <nebhale@nebhale.com>"
+    }
+  }
+}
