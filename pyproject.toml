@@ -1,0 +1,557 @@
+[project]
+name = "ha-solar-billing-plan-export-rates"
+version = "0.1.0"
+description = "Home Assistant custom integration for Solar Billing Plan export rates"
+readme = "README.md"
+requires-python = ">=3.14.2,<3.15"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Ben Hale" }]
+dependencies = [
+    "homeassistant==2026.6.4",
+    "voluptuous==0.15.2",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["custom_components*"]
+exclude = ["tests*"]
+
+[tool.ruff]
+required-version = ">=0.15.15"
+
+[tool.ruff.lint]
+select = [
+    "A001", # Variable {name} is shadowing a Python builtin
+    "ASYNC", # flake8-async
+    "B", # flake8-bugbear
+    "BLE",
+    "C", # complexity
+    "COM818", # Trailing comma on bare tuple prohibited
+    "D", # docstrings
+    "DTZ003", # Use datetime.now(tz=) instead of datetime.utcnow()
+    "DTZ004", # Use datetime.fromtimestamp(ts, tz=) instead of datetime.utcfromtimestamp(ts)
+    "DTZ011", # Use datetime.now(tz=).date() instead of date.today()
+    "E", # pycodestyle
+    "F", # pyflakes/autoflake
+    "F541", # f-string without any placeholders
+    "FLY", # flynt
+    "FURB", # refurb
+    "G", # flake8-logging-format
+    "I", # isort
+    "INP", # flake8-no-pep420
+    "ISC", # flake8-implicit-str-concat
+    "ICN001", # import concentions; {name} should be imported as {asname}
+    "LOG", # flake8-logging
+    "N804", # First argument of a class method should be named cls
+    "N805", # First argument of a method should be named self
+    "N806", # Variable {name} in function should be snake_case
+    "N815", # Variable {name} in class scope should not be mixedCase
+    "PERF", # Perflint
+    "PGH", # pygrep-hooks
+    "PIE", # flake8-pie
+    "PL", # pylint
+    "PT", # flake8-pytest-style
+    "PTH", # flake8-pathlib
+    "PYI", # flake8-pyi
+    "RET", # flake8-return
+    "RSE", # flake8-raise
+    "RUF", # Ruff-specific rules (see `ignore` for exclusions)
+    "S107", # Possible hardcoded password assigned to function default
+    "S102", # Use of exec detected
+    "S103", # bad-file-permissions
+    "S108", # hardcoded-temp-file
+    "S301", # suspicious-pickle-usage
+    "S306", # suspicious-mktemp-usage
+    "S307", # suspicious-eval-usage
+    "S313", # suspicious-xmlc-element-tree-usage
+    "S314", # suspicious-xml-element-tree-usage
+    "S315", # suspicious-xml-expat-reader-usage
+    "S316", # suspicious-xml-expat-builder-usage
+    "S317", # suspicious-xml-sax-usage
+    "S318", # suspicious-xml-mini-dom-usage
+    "S319", # suspicious-xml-pull-dom-usage
+    "S601", # paramiko-call
+    "S602", # subprocess-popen-with-shell-equals-true
+    "S604", # call-with-shell-equals-true
+    "S608", # hardcoded-sql-expression
+    "S609", # unix-command-wildcard-injection
+    "SIM", # flake8-simplify
+    "SLF", # flake8-self
+    "SLOT", # flake8-slots
+    "T100", # Trace found: {name} used
+    "T20", # flake8-print
+    "TC", # flake8-type-checking
+    "TID", # Tidy imports
+    "TRY", # tryceratops
+    "UP", # pyupgrade
+    "UP031", # Use format specifiers instead of percent format
+    "UP032", # Use f-string instead of `format` call
+    "W", # pycodestyle
+]
+
+ignore = [
+    "ASYNC109", # Async function definition with a `timeout` parameter Use `asyncio.timeout` instead
+    "ASYNC110", # Use `asyncio.Event` instead of awaiting `asyncio.sleep` in a `while` loop
+    "ASYNC240", # Use an async function for entering the file system
+    "B008", # Do not perform function call in argument defaults; commonly used in Home Assistant (e.g. cv.* validators)
+    "B019", # Use of functools.lru_cache or functools.cache on methods can lead to memory leaks
+    "D202", # No blank lines allowed after function docstring
+    "D203", # 1 blank line required before class docstring
+    "D213", # Multi-line docstring summary should start at the second line
+    "D406", # Section name should end with a newline
+    "D407", # Section name underlining
+    "D417", # Missing argument descriptions in docstring - to allow documenting only non-obvious parameters
+    "E501", # line too long
+
+    "PLC1901", # {existing} can be simplified to {replacement} as an empty string is falsey; too many false positives
+    "PLR0911", # Too many return statements ({returns} > {max_returns})
+    "PLR0912", # Too many branches ({branches} > {max_branches})
+    "PLR0913", # Too many arguments to function call ({c_args} > {max_args})
+    "PLR0915", # Too many statements ({statements} > {max_statements})
+    "PLR2004", # Magic value used in comparison, consider replacing {value} with a constant variable
+    "PLW0108", # Unnecessary lambda wrapping a function call; can often be replaced by the function itself
+    "PLW1641", # __eq__ without __hash__
+    "PLW2901", # Outer {outer_kind} variable {name} overwritten by inner {inner_kind} target
+    "PT011", # pytest.raises({exception}) is too broad, set the `match` parameter or use a more specific exception
+    "PT018", # Assertion should be broken down into multiple parts
+    "RUF001", # String contains ambiguous unicode character.
+    "RUF012", # Mutable class attributes should be annotated with typing.ClassVar
+    "RUF015", # Prefer next(...) over single element slice
+    "RUF043", # Pattern passed to match= contains metacharacters but is neither escaped nor raw
+    "SIM102", # Use a single if statement instead of nested if statements
+    "SIM103", # Return the condition {condition} directly
+    "SIM108", # Use ternary operator {contents} instead of if-else-block
+    "SIM115", # Use context handler for opening files
+
+    # Moving imports into type-checking blocks can mess with pytest.patch()
+    "TC001", # Move application import {} into a type-checking block
+    "TC002", # Move third-party import {} into a type-checking block
+    "TC003", # Move standard library import {} into a type-checking block
+    # Quotes for typing.cast generally not necessary, only for performance critical paths
+    "TC006", # Add quotes to type expression in typing.cast()
+
+    "TRY003", # Avoid specifying long messages outside the exception class
+    "TRY400", # Use `logging.exception` instead of `logging.error`
+
+    "UP047", # Non PEP 696 generic function
+    "UP049", # Avoid private type parameter names
+
+    # May conflict with the formatter, https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
+    "W191",
+    "E111",
+    "E114",
+    "E117",
+    "D206",
+    "D300",
+    "Q",
+    "COM812",
+    "COM819",
+
+    # Disabled because ruff does not understand type of __all__ generated by a function
+    "PLE0605",
+
+    "FURB116",
+]
+
+[tool.ruff.lint.flake8-import-conventions.extend-aliases]
+voluptuous = "vol"
+"homeassistant.components.air_quality.PLATFORM_SCHEMA" = "AIR_QUALITY_PLATFORM_SCHEMA"
+"homeassistant.components.alarm_control_panel.PLATFORM_SCHEMA" = "ALARM_CONTROL_PANEL_PLATFORM_SCHEMA"
+"homeassistant.components.binary_sensor.PLATFORM_SCHEMA" = "BINARY_SENSOR_PLATFORM_SCHEMA"
+"homeassistant.components.button.PLATFORM_SCHEMA" = "BUTTON_PLATFORM_SCHEMA"
+"homeassistant.components.calendar.PLATFORM_SCHEMA" = "CALENDAR_PLATFORM_SCHEMA"
+"homeassistant.components.camera.PLATFORM_SCHEMA" = "CAMERA_PLATFORM_SCHEMA"
+"homeassistant.components.climate.PLATFORM_SCHEMA" = "CLIMATE_PLATFORM_SCHEMA"
+"homeassistant.components.conversation.PLATFORM_SCHEMA" = "CONVERSATION_PLATFORM_SCHEMA"
+"homeassistant.components.cover.PLATFORM_SCHEMA" = "COVER_PLATFORM_SCHEMA"
+"homeassistant.components.date.PLATFORM_SCHEMA" = "DATE_PLATFORM_SCHEMA"
+"homeassistant.components.datetime.PLATFORM_SCHEMA" = "DATETIME_PLATFORM_SCHEMA"
+"homeassistant.components.device_tracker.PLATFORM_SCHEMA" = "DEVICE_TRACKER_PLATFORM_SCHEMA"
+"homeassistant.components.event.PLATFORM_SCHEMA" = "EVENT_PLATFORM_SCHEMA"
+"homeassistant.components.fan.PLATFORM_SCHEMA" = "FAN_PLATFORM_SCHEMA"
+"homeassistant.components.geo_location.PLATFORM_SCHEMA" = "GEO_LOCATION_PLATFORM_SCHEMA"
+"homeassistant.components.humidifier.PLATFORM_SCHEMA" = "HUMIDIFIER_PLATFORM_SCHEMA"
+"homeassistant.components.image.PLATFORM_SCHEMA" = "IMAGE_PLATFORM_SCHEMA"
+"homeassistant.components.image_processing.PLATFORM_SCHEMA" = "IMAGE_PROCESSING_PLATFORM_SCHEMA"
+"homeassistant.components.lawn_mower.PLATFORM_SCHEMA" = "LAWN_MOWER_PLATFORM_SCHEMA"
+"homeassistant.components.light.PLATFORM_SCHEMA" = "LIGHT_PLATFORM_SCHEMA"
+"homeassistant.components.lock.PLATFORM_SCHEMA" = "LOCK_PLATFORM_SCHEMA"
+"homeassistant.components.media_player.PLATFORM_SCHEMA" = "MEDIA_PLAYER_PLATFORM_SCHEMA"
+"homeassistant.components.notify.PLATFORM_SCHEMA" = "NOTIFY_PLATFORM_SCHEMA"
+"homeassistant.components.number.PLATFORM_SCHEMA" = "NUMBER_PLATFORM_SCHEMA"
+"homeassistant.components.remote.PLATFORM_SCHEMA" = "REMOTE_PLATFORM_SCHEMA"
+"homeassistant.components.scene.PLATFORM_SCHEMA" = "SCENE_PLATFORM_SCHEMA"
+"homeassistant.components.select.PLATFORM_SCHEMA" = "SELECT_PLATFORM_SCHEMA"
+"homeassistant.components.sensor.PLATFORM_SCHEMA" = "SENSOR_PLATFORM_SCHEMA"
+"homeassistant.components.siren.PLATFORM_SCHEMA" = "SIREN_PLATFORM_SCHEMA"
+"homeassistant.components.stt.PLATFORM_SCHEMA" = "STT_PLATFORM_SCHEMA"
+"homeassistant.components.switch.PLATFORM_SCHEMA" = "SWITCH_PLATFORM_SCHEMA"
+"homeassistant.components.text.PLATFORM_SCHEMA" = "TEXT_PLATFORM_SCHEMA"
+"homeassistant.components.time.PLATFORM_SCHEMA" = "TIME_PLATFORM_SCHEMA"
+"homeassistant.components.todo.PLATFORM_SCHEMA" = "TODO_PLATFORM_SCHEMA"
+"homeassistant.components.tts.PLATFORM_SCHEMA" = "TTS_PLATFORM_SCHEMA"
+"homeassistant.components.vacuum.PLATFORM_SCHEMA" = "VACUUM_PLATFORM_SCHEMA"
+"homeassistant.components.valve.PLATFORM_SCHEMA" = "VALVE_PLATFORM_SCHEMA"
+"homeassistant.components.update.PLATFORM_SCHEMA" = "UPDATE_PLATFORM_SCHEMA"
+"homeassistant.components.wake_word.PLATFORM_SCHEMA" = "WAKE_WORD_PLATFORM_SCHEMA"
+"homeassistant.components.water_heater.PLATFORM_SCHEMA" = "WATER_HEATER_PLATFORM_SCHEMA"
+"homeassistant.components.weather.PLATFORM_SCHEMA" = "WEATHER_PLATFORM_SCHEMA"
+"homeassistant.core.DOMAIN" = "HOMEASSISTANT_DOMAIN"
+"homeassistant.helpers.area_registry" = "ar"
+"homeassistant.helpers.category_registry" = "cr"
+"homeassistant.helpers.config_validation" = "cv"
+"homeassistant.helpers.device_registry" = "dr"
+"homeassistant.helpers.entity_registry" = "er"
+"homeassistant.helpers.floor_registry" = "fr"
+"homeassistant.helpers.issue_registry" = "ir"
+"homeassistant.helpers.label_registry" = "lr"
+"homeassistant.util.color" = "color_util"
+"homeassistant.util.dt" = "dt_util"
+"homeassistant.util.json" = "json_util"
+"homeassistant.util.location" = "location_util"
+"homeassistant.util.logging" = "logging_util"
+"homeassistant.util.network" = "network_util"
+"homeassistant.util.ulid" = "ulid_util"
+"homeassistant.util.uuid" = "uuid_util"
+"homeassistant.util.yaml" = "yaml_util"
+
+[tool.ruff.lint.flake8-pytest-style]
+fixture-parentheses = false
+mark-parentheses = false
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"async_timeout".msg = "use asyncio.timeout instead"
+"pytz".msg = "use zoneinfo instead"
+"tests".msg = "You should not import tests"
+"__future__.annotations".msg = "It should not be needed because Home Assistant requires Python 3.14+"
+
+[tool.ruff.lint.isort]
+force-sort-within-sections = true
+known-first-party = ["custom_components", "tests"]
+combine-as-imports = true
+split-on-trailing-comma = false
+
+[tool.ruff.lint.per-file-ignores]
+
+# Allow for main entry & scripts to write to stdout
+"scripts/*" = ["T20"]
+
+# Allow relative imports within the custom integration
+"custom_components/solar_billing_plan_export_rates/*" = ["TID252"]
+
+# Temporary, matching Home Assistant Core.
+"custom_components/**" = ["PTH"]
+"tests/**" = ["PTH", "TID251"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 25
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+property-decorators = ["propcache.api.cached_property"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+lint = [
+    "mypy==2.1.0",
+    "pylint==4.0.6",
+    "pylint-per-file-ignores==3.2.1",
+    "ruff==0.15.18",
+]
+test = [
+    "pytest==9.0.3",
+    "pytest-cov==7.1.0",
+    "pytest-homeassistant-custom-component==0.13.340",
+]
+
+[tool.pylint.MAIN]
+py-version = "3.14"
+jobs = 2
+load-plugins = [
+    "pylint.extensions.code_style",
+    "pylint.extensions.typing",
+    "pylint_per_file_ignores",
+]
+persistent = false
+fail-on = ["I"]
+
+[tool.pylint.BASIC]
+class-const-naming-style = "any"
+
+[tool.pylint."MESSAGES CONTROL"]
+# Vendored from Home Assistant Core's pylint configuration.
+disable = [
+    "format",
+    "abstract-method",
+    "cyclic-import",
+    "duplicate-code",
+    "inconsistent-return-statements",
+    "locally-disabled",
+    "not-context-manager",
+    "too-few-public-methods",
+    "too-many-ancestors",
+    "too-many-arguments",
+    "too-many-instance-attributes",
+    "too-many-lines",
+    "too-many-locals",
+    "too-many-public-methods",
+    "too-many-boolean-expressions",
+    "too-many-positional-arguments",
+    "wrong-import-order",
+    "consider-using-namedtuple-or-dataclass",
+    "consider-using-assignment-expr",
+    "possibly-used-before-assignment",
+    "await-outside-async",
+    "bad-str-strip-call",
+    "bad-string-format-type",
+    "bidirectional-unicode",
+    "continue-in-finally",
+    "duplicate-bases",
+    "misplaced-bare-raise",
+    "format-needs-mapping",
+    "function-redefined",
+    "invalid-all-format",
+    "invalid-all-object",
+    "invalid-character-backspace",
+    "invalid-character-esc",
+    "invalid-character-nul",
+    "invalid-character-sub",
+    "invalid-character-zero-width-space",
+    "logging-too-few-args",
+    "logging-too-many-args",
+    "missing-format-string-key",
+    "mixed-format-string",
+    "no-method-argument",
+    "no-self-argument",
+    "nonexistent-operator",
+    "nonlocal-without-binding",
+    "not-in-loop",
+    "notimplemented-raised",
+    "return-in-init",
+    "return-outside-function",
+    "syntax-error",
+    "too-few-format-args",
+    "too-many-format-args",
+    "too-many-star-expressions",
+    "truncated-format-string",
+    "undefined-all-variable",
+    "undefined-variable",
+    "used-prior-global-declaration",
+    "yield-inside-async-function",
+    "yield-outside-function",
+    "anomalous-backslash-in-string",
+    "assert-on-string-literal",
+    "assert-on-tuple",
+    "bad-format-string",
+    "bad-format-string-key",
+    "bare-except",
+    "binary-op-exception",
+    "cell-var-from-loop",
+    "duplicate-except",
+    "duplicate-key",
+    "duplicate-string-formatting-argument",
+    "duplicate-value",
+    "eval-used",
+    "exec-used",
+    "expression-not-assigned",
+    "f-string-without-interpolation",
+    "forgotten-debug-statement",
+    "format-string-without-interpolation",
+    "global-variable-not-assigned",
+    "implicit-str-concat",
+    "import-outside-toplevel",
+    "import-self",
+    "inconsistent-quotes",
+    "invalid-envvar-default",
+    "keyword-arg-before-vararg",
+    "logging-format-interpolation",
+    "logging-fstring-interpolation",
+    "logging-not-lazy",
+    "misplaced-future",
+    "named-expr-without-context",
+    "nested-min-max",
+    "pointless-statement",
+    "raise-missing-from",
+    "redefined-builtin",
+    "try-except-raise",
+    "unused-argument",
+    "unused-format-string-argument",
+    "unused-format-string-key",
+    "unused-import",
+    "unused-variable",
+    "useless-else-on-loop",
+    "wildcard-import",
+    "bad-classmethod-argument",
+    "consider-iterating-dictionary",
+    "empty-docstring",
+    "invalid-name",
+    "line-too-long",
+    "missing-class-docstring",
+    "missing-final-newline",
+    "missing-function-docstring",
+    "missing-module-docstring",
+    "multiple-imports",
+    "singleton-comparison",
+    "subprocess-run-check",
+    "superfluous-parens",
+    "ungrouped-imports",
+    "unidiomatic-typecheck",
+    "unnecessary-direct-lambda-call",
+    "unnecessary-lambda-assignment",
+    "unnecessary-pass",
+    "unneeded-not",
+    "useless-import-alias",
+    "wrong-import-position",
+    "comparison-of-constants",
+    "comparison-with-itself",
+    "consider-alternative-union-syntax",
+    "consider-merging-isinstance",
+    "consider-using-alias",
+    "consider-using-dict-comprehension",
+    "consider-using-generator",
+    "consider-using-get",
+    "consider-using-set-comprehension",
+    "consider-using-sys-exit",
+    "consider-using-ternary",
+    "literal-comparison",
+    "property-with-parameters",
+    "super-with-arguments",
+    "too-many-branches",
+    "too-many-return-statements",
+    "too-many-statements",
+    "trailing-comma-tuple",
+    "unnecessary-comprehension",
+    "use-a-generator",
+    "use-dict-literal",
+    "use-list-literal",
+    "useless-object-inheritance",
+    "useless-return",
+    "no-else-break",
+    "no-else-continue",
+    "no-else-raise",
+    "no-else-return",
+    "broad-except",
+    "protected-access",
+    "broad-exception-raised",
+    "consider-using-f-string",
+    "abstract-class-instantiated",
+    "arguments-differ",
+    "assigning-non-slot",
+    "assignment-from-no-return",
+    "assignment-from-none",
+    "bad-exception-cause",
+    "bad-format-character",
+    "bad-reversed-sequence",
+    "bad-super-call",
+    "bad-thread-instantiation",
+    "catching-non-exception",
+    "comparison-with-callable",
+    "deprecated-class",
+    "dict-iter-missing-items",
+    "format-combined-specification",
+    "global-variable-undefined",
+    "import-error",
+    "inconsistent-mro",
+    "inherit-non-class",
+    "init-is-generator",
+    "invalid-class-object",
+    "invalid-enum-extension",
+    "invalid-envvar-value",
+    "invalid-format-returned",
+    "invalid-hash-returned",
+    "invalid-metaclass",
+    "invalid-overridden-method",
+    "invalid-repr-returned",
+    "invalid-sequence-index",
+    "invalid-slice-index",
+    "invalid-slots-object",
+    "invalid-slots",
+    "invalid-star-assignment-target",
+    "invalid-str-returned",
+    "invalid-unary-operand-type",
+    "invalid-unicode-codec",
+    "isinstance-second-argument-not-valid-type",
+    "method-hidden",
+    "misplaced-format-function",
+    "missing-format-argument-key",
+    "missing-format-attribute",
+    "missing-kwoa",
+    "no-member",
+    "no-value-for-parameter",
+    "non-iterator-returned",
+    "non-str-assignment-to-dunder-name",
+    "nonlocal-and-global",
+    "not-a-mapping",
+    "not-an-iterable",
+    "not-async-context-manager",
+    "not-callable",
+    "not-context-manager",
+    "overridden-final-method",
+    "raising-bad-type",
+    "raising-non-exception",
+    "redundant-keyword-arg",
+    "relative-beyond-top-level",
+    "self-cls-assignment",
+    "signature-differs",
+    "star-needs-assignment-target",
+    "subclassed-final-class",
+    "super-without-brackets",
+    "too-many-function-args",
+    "typevar-double-variance",
+    "typevar-name-mismatch",
+    "unbalanced-dict-unpacking",
+    "unbalanced-tuple-unpacking",
+    "unexpected-keyword-arg",
+    "unhashable-member",
+    "unpacking-non-sequence",
+    "unsubscriptable-object",
+    "unsupported-assignment-operation",
+    "unsupported-binary-operation",
+    "unsupported-delete-operation",
+    "unsupported-membership-test",
+    "used-before-assignment",
+    "using-final-decorator-in-unsupported-version",
+    "wrong-exception-operation",
+]
+enable = [
+    "use-symbolic-message-instead",
+]
+per-file-ignores = [
+    # redefined-outer-name: Tests reference fixtures in the test function
+    # use-implicit-booleaness-not-comparison: Tests need to validate that a list
+    # or a dict is returned
+    "tests/**:redefined-outer-name,use-implicit-booleaness-not-comparison",
+]
+
+[tool.pylint.REPORTS]
+score = false
+
+[tool.pylint.TYPECHECK]
+ignored-classes = [
+    "_CountingAttr",
+]
+mixin-class-rgx = ".*[Mm]ix[Ii]n"
+
+[tool.pylint.FORMAT]
+expected-line-ending-format = "LF"
+
+[tool.pylint.EXCEPTIONS]
+overgeneral-exceptions = [
+    "builtins.BaseException",
+    "builtins.Exception",
+]
+
+[tool.pylint.TYPING]
+runtime-typing = false
+
+[tool.pylint.CODE_STYLE]
+max-line-length-suggestions = 72

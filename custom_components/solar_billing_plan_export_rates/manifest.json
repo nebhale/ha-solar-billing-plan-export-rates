@@ -1,0 +1,17 @@
+{
+  "domain": "solar_billing_plan_export_rates",
+  "name": "Solar Billing Plan Export Rates",
+  "codeowners": ["@nebhale"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/nebhale/ha-pge-solar-export-rates",
+  "homekit": {},
+  "integration_type": "service",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/nebhale/ha-pge-solar-export-rates/issues",
+  "quality_scale": "bronze",
+  "requirements": [],
+  "ssdp": [],
+  "version": "1.0.0",
+  "zeroconf": []
+}

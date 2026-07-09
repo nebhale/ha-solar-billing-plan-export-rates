@@ -1,0 +1,83 @@
+name: Validate
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  hacs:
+    name: HACS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: HACS validation
+        uses: hacs/action@main
+        with:
+          category: integration
+
+  hassfest:
+    name: Hassfest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Hassfest validation
+        uses: home-assistant/actions/hassfest@master
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Install Python
+        run: uv python install
+
+      - name: Install validation tools
+        run: uv sync --frozen --group lint --no-install-project
+
+      - name: Lint
+        run: uv run --no-sync ruff check .
+
+      - name: Format
+        run: uv run --no-sync ruff format --check .
+
+      - name: Pylint
+        run: uv run --no-sync pylint custom_components tests
+
+      - name: Mypy
+        run: uv run --no-sync mypy
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Install Python
+        run: uv python install
+
+      - name: Install test dependencies
+        run: uv sync --frozen --group test --no-install-project
+
+      - name: Test
+        run: >-
+          uv run --no-sync pytest tests
+          --cov=custom_components.solar_billing_plan_export_rates
+          --cov-report=term-missing
+          --cov-report=xml
+          -vv

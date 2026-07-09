@@ -1,0 +1,8 @@
+# Used by hassfest for generating mypy.ini.
+# If component is fully covered with type annotations, please add it here
+# to enable strict mypy checks.
+
+# This custom-component repository uses the custom_components package name.
+# When moving to home-assistant/core, use:
+# homeassistant.components.solar_billing_plan_export_rates.*
+custom_components.solar_billing_plan_export_rates.*

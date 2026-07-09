@@ -1,0 +1,56 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Service is already configured"
+    },
+    "step": {
+      "user": {
+        "data": {
+          "care_fera": "CARE/FERA",
+          "customer_segment": "Customer segment",
+          "energy_export_bonus": "Energy Export Bonus",
+          "generation_provider": "Generation provider",
+          "vintage": "NBT vintage"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "care_fera": "CARE/FERA",
+          "customer_segment": "Customer segment",
+          "energy_export_bonus": "Energy Export Bonus",
+          "generation_provider": "Generation provider",
+          "vintage": "NBT vintage"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "all_in_export_rate": {
+        "name": "All-In Export Rate"
+      },
+      "base_export_rate": {
+        "name": "Base Export Rate"
+      },
+      "care_fera_export_bonus_rate": {
+        "name": "CARE/FERA Export Bonus Rate"
+      },
+      "delivery_export_rate": {
+        "name": "Delivery Export Rate"
+      },
+      "energy_export_bonus_rate": {
+        "name": "Energy Export Bonus Rate"
+      },
+      "generation_export_rate": {
+        "name": "Generation Export Rate"
+      },
+      "mce_solar_bonus_rate": {
+        "name": "MCE Solar Bonus Rate"
+      }
+    }
+  }
+}
