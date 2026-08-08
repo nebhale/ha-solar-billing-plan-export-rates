@@ -188,7 +188,8 @@ async def async_setup_entry(
     hass: HomeAssistant, entry: SolarBillingPlanExportRatesConfigEntry
 ) -> bool:
     """Set up Solar Billing Plan Export Rates from a config entry."""
-    entry.runtime_data = SolarBillingPlanExportRatesData(hass, entry, load_rate_data())
+    rate_data = await hass.async_add_executor_job(load_rate_data)
+    entry.runtime_data = SolarBillingPlanExportRatesData(hass, entry, rate_data)
     await entry.runtime_data.async_start()
     entry.async_on_unload(entry.add_update_listener(_async_update_listener))
 
