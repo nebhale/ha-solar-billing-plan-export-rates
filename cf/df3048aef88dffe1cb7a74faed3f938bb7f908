@@ -1,0 +1,19 @@
+custom_components/solar_billing_plan_export_rates/__init__.py
+  s_f495d947b671b3::t_d3b6611e8863a3 191-192
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "cfdf3048aef88dffe1cb7a74faed3f938bb7f908",
+  "prompts": {},
+  "sessions": {
+    "s_f495d947b671b3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fe192-809a-7242-9eb0-12bedc2f46a5",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": null
+    }
+  }
+}
