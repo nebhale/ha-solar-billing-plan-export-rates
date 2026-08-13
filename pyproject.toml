@@ -263,9 +263,9 @@ package = false
 [dependency-groups]
 lint = [
     "mypy==2.1.0",
-    "pylint==4.0.6",
+    "pylint==4.0.7",
     "pylint-per-file-ignores==3.2.1",
-    "ruff==0.16.1",
+    "ruff==0.16.2",
 ]
 test = [
     "pytest==9.0.3",
