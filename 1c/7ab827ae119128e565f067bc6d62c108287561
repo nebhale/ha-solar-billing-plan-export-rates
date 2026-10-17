@@ -1,0 +1,23 @@
+custom_components/solar_billing_plan_export_rates/manifest.json
+  s_69e6b09eb309f5::t_f0926f2ffdb2a1 7,11,15
+pyproject.toml
+  s_69e6b09eb309f5::t_f0926f2ffdb2a1 3
+uv.lock
+  s_69e6b09eb309f5::t_8e79eb8f056ad8 959
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1c7ab827ae119128e565f067bc6d62c108287561",
+  "prompts": {},
+  "sessions": {
+    "s_69e6b09eb309f5": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a14a9f-bf70-7d10-9222-2a5ba72280d3",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Ben Hale <nebhale@nebhale.com>"
+    }
+  }
+}
