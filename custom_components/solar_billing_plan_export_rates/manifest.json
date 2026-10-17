@@ -4,14 +4,14 @@
   "codeowners": ["@nebhale"],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/nebhale/ha-pge-solar-export-rates",
+  "documentation": "https://github.com/nebhale/ha-solar-billing-plan-export-rates",
   "homekit": {},
   "integration_type": "service",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/nebhale/ha-pge-solar-export-rates/issues",
+  "issue_tracker": "https://github.com/nebhale/ha-solar-billing-plan-export-rates/issues",
   "quality_scale": "bronze",
   "requirements": [],
   "ssdp": [],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "zeroconf": []
 }
