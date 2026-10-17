@@ -1,6 +1,6 @@
 """Config flow for the Solar Billing Plan Export Rates integration."""
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from homeassistant.config_entries import (
     ConfigEntry,
@@ -9,7 +9,6 @@ from homeassistant.config_entries import (
     OptionsFlow,
 )
 from homeassistant.core import callback
-import voluptuous as vol
 
 from .const import (
     CONF_CARE_FERA,
@@ -32,6 +31,12 @@ from .const import (
     VINTAGES,
 )
 from .rates import default_energy_export_bonus
+
+# Home Assistant 2026.9+ aliases voluptuous to probatio at runtime.
+if TYPE_CHECKING:
+    import probatio as vol
+else:
+    import voluptuous as vol
 
 CUSTOMER_SEGMENTS = (CUSTOMER_SEGMENT_RESIDENTIAL, CUSTOMER_SEGMENT_BUSINESS)
 ENERGY_EXPORT_BONUSES = (
