@@ -5,9 +5,17 @@ updates:
     schedule:
       interval: weekly
     groups:
+      # The test plugin pins Home Assistant and pytest packages; update them together.
+      home-assistant:
+        patterns:
+          - homeassistant
+          - "pytest*"
       python-dependencies:
         patterns:
           - "*"
+        exclude-patterns:
+          - homeassistant
+          - "pytest*"
     open-pull-requests-limit: 5
     commit-message:
       prefix: deps
