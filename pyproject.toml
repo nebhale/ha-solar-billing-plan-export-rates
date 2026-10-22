@@ -265,7 +265,7 @@ lint = [
     "mypy==2.4.0",
     "pylint==4.1.3",
     "pylint-per-file-ignores==4.0.0",
-    "ruff==0.17.0",
+    "ruff==0.17.1",
 ]
 test = [
     "pytest==9.0.3",
