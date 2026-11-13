@@ -52,6 +52,10 @@ Generate the compact rate table from PG&E CSV files:
 python scripts/generate_rates.py /path/to/PGE-Solar-Billing-Plan-Export-Rates
 ```
 
+Keep the `homeassistant` and `pytest-homeassistant` versions aligned when
+updating dependencies. The official pytest plugin enables custom integrations
+automatically.
+
 Run validation:
 
 ```bash
